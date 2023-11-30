@@ -1,6 +1,6 @@
 package com.ll.sb231130.domain.article.article.controller;
 
-import com.ll.sb231130.domain.article.article.entity.Article;
+import com.ll.sb231130.domain.article.article.dto.ArticleDto;
 import com.ll.sb231130.domain.article.article.service.ArticleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,11 @@ public class ApiV1ArticlesController {
     private final ArticleService articleService;
 
     @GetMapping("")
-    public List<Article> getArticles() {
-        return articleService.findAll();
+    public List<ArticleDto> getArticles() {
+        return articleService
+                .findAll()
+                .stream()
+                .map(article -> new ArticleDto(article))
+                .toList();
     }
 }

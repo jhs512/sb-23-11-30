@@ -20,7 +20,6 @@ import static lombok.AccessLevel.PROTECTED;
 @ToString(callSuper = true)
 public class Article extends BaseEntity {
     @ManyToOne(fetch = LAZY)
-    @JsonIgnore
     private Member author;
     private String title;
     private String body;
