@@ -1,5 +1,6 @@
 package com.ll.sb231130.domain.article.article.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ll.sb231130.domain.member.member.entity.Member;
 import com.ll.sb231130.global.jpa.BaseEntity;
 import jakarta.persistence.Entity;
@@ -19,6 +20,7 @@ import static lombok.AccessLevel.PROTECTED;
 @ToString(callSuper = true)
 public class Article extends BaseEntity {
     @ManyToOne(fetch = LAZY)
+    @JsonIgnore
     private Member author;
     private String title;
     private String body;
