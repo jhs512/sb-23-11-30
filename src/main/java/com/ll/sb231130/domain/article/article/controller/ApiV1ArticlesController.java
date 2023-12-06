@@ -6,6 +6,7 @@ import com.ll.sb231130.domain.article.article.service.ArticleService;
 import com.ll.sb231130.global.rsData.RsData;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -86,6 +87,40 @@ public class ApiV1ArticlesController {
                 "200",
                 "성공",
                 new RemoveArticleResponseBody(
+                        article
+                )
+        );
+    }
+
+    @Getter
+    @Setter
+    public static class ModifyArticleRequestBody {
+        private String title;
+        private String body;
+    }
+
+    @Getter
+    public static class ModifyArticleResponseBody {
+        private final ArticleDto item;
+
+        public ModifyArticleResponseBody(Article article) {
+            item = new ArticleDto(article);
+        }
+    }
+
+    @PutMapping("/{id}")
+    public RsData<ModifyArticleResponseBody> modifyArticle(
+            @PathVariable long id,
+            @RequestBody ModifyArticleRequestBody body
+    ) {
+        Article article = articleService.findById(id).get();
+
+        articleService.modify(article, body.getTitle(), body.getBody());
+
+        return RsData.of(
+                "200",
+                "성공",
+                new ModifyArticleResponseBody(
                         article
                 )
         );
