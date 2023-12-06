@@ -1,5 +1,6 @@
 package com.ll.sb231130.global.rsData;
 
+import com.ll.sb231130.domain.article.article.controller.ApiV1ArticlesController;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -25,5 +26,9 @@ public class RsData<T> {
 
     public boolean isFail() {
         return !isSuccess();
+    }
+
+    public <T> RsData<T> of(T data) {
+        return RsData.of(resultCode, msg, data);
     }
 }
