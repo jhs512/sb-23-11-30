@@ -21,9 +21,6 @@ public class Member extends BaseEntity {
     private String password;
     private String email;
     private String nickname;
-    @Column(unique = true)
-    @UuidGenerator(style = UuidGenerator.Style.RANDOM)
-    private String apiKey;
 
     public String getName() {
         return nickname;
