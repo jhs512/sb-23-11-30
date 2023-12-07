@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 @Service
 @Transactional(readOnly = true)
@@ -39,5 +40,9 @@ public class MemberService {
 
     public long count() {
         return memberRepository.count();
+    }
+
+    public Optional<Member> findByUsername(String username) {
+        return memberRepository.findByUsername(username);
     }
 }

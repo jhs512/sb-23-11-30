@@ -5,6 +5,8 @@ import com.ll.sb231130.domain.member.member.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
@@ -19,7 +21,10 @@ public class Rq {
 
     public Member getMember() {
         if (member == null) {
-            member = memberService.findById(1L).get();
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            user.getUsername();
+
+            member = memberService.findByUsername(user.getUsername()).get();
         }
 
         return member;
