@@ -1,6 +1,5 @@
 package com.ll.sb231130.global.security;
 
-import com.ll.sb231130.domain.member.member.entity.Member;
 import com.ll.sb231130.domain.member.member.service.MemberService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,8 +13,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import java.util.List;
-
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -27,13 +24,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String apiKey = request.getHeader("X-ApiKey");
 
         if (apiKey != null) {
-            Member member = memberService.findByApiKey(apiKey).get();
-
-            User user = new User(
-                    String.valueOf(member.getId()),
-                    member.getPassword(),
-                    List.of()
-            );
+            User user = memberService.getUserFromApiKey(apiKey);
 
             Authentication auth = new UsernamePasswordAuthenticationToken(
                     user,
