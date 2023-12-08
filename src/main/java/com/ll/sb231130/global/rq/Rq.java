@@ -22,9 +22,9 @@ public class Rq {
     public Member getMember() {
         if (member == null) {
             User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            user.getUsername();
+            long memberId = Long.parseLong(user.getUsername());
 
-            member = memberService.findByUsername(user.getUsername()).get();
+            member = memberService.findById(memberId).get();
         }
 
         return member;
