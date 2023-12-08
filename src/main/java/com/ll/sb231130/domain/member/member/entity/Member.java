@@ -28,6 +28,7 @@ public class Member extends BaseEntity {
         return nickname;
     }
 
+    @SuppressWarnings("JpaAttributeTypeInspection")
     public List<? extends GrantedAuthority> getAuthorities() {
         return getAuthoritiesAsStrList()
                 .stream()
@@ -35,6 +36,7 @@ public class Member extends BaseEntity {
                 .toList();
     }
 
+    @SuppressWarnings("JpaAttributeTypeInspection")
     public List<String> getAuthoritiesAsStrList() {
         return List.of("ROLE_MEMBER");
     }
