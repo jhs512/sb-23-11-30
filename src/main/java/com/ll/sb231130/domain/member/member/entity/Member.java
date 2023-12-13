@@ -23,6 +23,7 @@ public class Member extends BaseEntity {
     private String password;
     private String email;
     private String nickname;
+    private String refreshToken;
 
     public String getName() {
         return nickname;
